@@ -1,6 +1,10 @@
 const tableNames = {
   TBL_AUTHORS: 'authors',
-  TBL_BOOKS: 'books'
+  TBL_BOOKS: 'books',
+  TBL_EMPLOYEE: 'employee',
+  TBL_USER: 'user',
+  TBL_SUBJECT: 'subject',
+  TBL_DEPARTMENT: 'department'
 };
 
 const defaultCols = {
@@ -23,9 +27,35 @@ const bookCols = {
   AUTHOR_ID: 'author_id'
 };
 
+const employeeCols = {
+  NAME: 'name',
+  EMAIL: 'email',
+  
+};
+
+const userCols = {
+  NAME: 'name',
+  ADDRESS: 'address',
+  
+};
+
+const subjectCols = {
+  NAME: 'name',
+  SCORE: 'score',
+};
+
+const departmentCols = {
+  NAME: 'name',
+  DEPT_ID: 'dept_id',
+};
+
 module.exports = {
   table_name: tableNames,
   default_column: defaultCols,
   author_column: authorCols,
-  book_column: bookCols
+  book_column: bookCols,
+  employee_column: employeeCols,
+  user_column: userCols,
+  subject_column: subjectCols,
+  department_column: departmentCols
 };

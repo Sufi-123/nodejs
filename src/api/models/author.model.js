@@ -1,8 +1,9 @@
-import bookshelf from '../../database/database';
+const {Model} = require ('objection');
+
 import dbConst from '../../database/constants';
 
-class Author extends bookshelf.Model {
-  get tableName() {
+class Author extends Model {
+  static get tableName() {
     return dbConst.table_name.TBL_AUTHORS;
   }
 
@@ -11,4 +12,4 @@ class Author extends bookshelf.Model {
   }
 }
 
-export default Author;
+module.exports = Author;

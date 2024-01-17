@@ -1,25 +1,27 @@
-import { Router } from 'express';
+
 import { bookService } from '../services';
-import HttpStatus from 'http-status-codes';
 
-let router = Router();
+export const getAllBooks = async (req, res, next)=>{
+  try {
+    const books = await bookService.getAllBooks();
+    res.json(books);
+    } catch(error){
+      console.error(error);
 
-router.get('/', (req, res, next) => {
-  bookService
-    .getAllBooks()
-    .then(data => res.json({ data }))
-    .catch(err => next(err));
-});
+    }
+  };
 
-router.get('/:id', (req, res, next) => {
-  bookService
-    .getBookById(req.params.id)
-    .then(data => res.json({ data }))
-    .catch(err => next(err));
-});
 
-router.post('/', (req, res, next) => {
-  bookService.createBook(req.body).then(data => res.status(HttpStatus.CREATED).json({ data }));
-});
-
-export default router;
+export const  getBooksById = async(req, res, next) => {
+    try {
+      const booksId = req.params.id; // Replace with the actual ID
+      const books = await bookService.getBooksById(booksId);
+        
+      // Use the retrieved employee object here
+      // console.log(employee.id); // Example usage
+      return res.json(books);
+    } catch (error) {
+      console.error(error);
+      
+    }
+  }

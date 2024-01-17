@@ -6,14 +6,15 @@
 
 const dbConst = require('../constants');
 
-exports.seed = function(knex, Promise) {
+exports.seed = async function(knex) {
+
+  await knex.raw('TRUNCATE TABLE "books" CASCADE');
   // Deletes all existing entries
   return knex(dbConst.table_name.TBL_BOOKS)
     .del()
     .then(() => {
       // Inserts seed entries
-      return Promise.all([
-        knex(dbConst.table_name.TBL_BOOKS).insert([
+      return knex(dbConst.table_name.TBL_BOOKS).insert([
           {
             title: 'Defence of the Ancients',
             pages: 722,
@@ -50,6 +51,6 @@ exports.seed = function(knex, Promise) {
             author_id: 2
           }
         ])
-      ]);
+      
     });
 };

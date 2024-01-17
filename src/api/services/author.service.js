@@ -1,40 +1,40 @@
 import Boom from 'boom';
-import Author from '../models/author.model';
+import Authors from '../models/author.model';
 
-export function getAllAuthor() {
-  return Author.fetchAll();
+export async function getAllAuthors() {
+  try{
+    const authors = await Authors.query()
+    .select('first_name', 'last_name', 'email', 'address')
+    .where('address', '=', 'Radiant')
+    .orderBy('last_name');
+    return authors;
+  }catch(error){
+    console.error(error);
+    throw new Error('Error retrieving authors');
+  }
 }
 
-export function getAuthorById(id) {
-  return new Author({ id }).fetch().then(author => {
-    if (!author) {
-      throw Boom.notFound('Author not found');
+export async function getAuthorsById(id) {
+  try {
+    console.log(">>>>>>>>>>>>>>>>>>>>>>>>id",id);
+    const authors =   Authors.query().findById(id)
+
+    if (!authors) {
+      throw Boom.notFound('Authors not found');
     }
 
-    return author;
-  });
+    return authors; // Return the retrieved employee object
+  } catch (error) {
+    console.error(error);
+    throw new Error('Error retrieving authors'); // Handle other errors
+  }
 }
 
-export function createAuthor(author) {
-  return new Author({
-    first_name: author.first_name,
-    last_name: author.last_name,
-    email: author.email,
-    phone_number: author.phone_number,
-    address: author.address
+export function createAuthors(authors) {
+  return new Authors({
+    title: authors.title,
+    id: authors.id,
+    pages: authors.pages,
+    author_id: authors.author_id
   }).save();
-}
-
-export function updateAuthor(id, author) {
-  return new Author({ id }).save({
-    first_name: author.first_name,
-    last_name: author.last_name,
-    email: author.email,
-    phone_number: author.phone_number,
-    address: author.address
-  });
-}
-
-export function deleteAuthor(id) {
-  return new Author({ id }).fetch().then(author => author.destroy());
 }

@@ -9,7 +9,20 @@ import json from './middlewares/json';
 import logger, { logStream } from './utils/logger';
 import * as errorHandler from './middlewares/errorHandler';
 
+
+
+
 const routes = require('./routes');
+
+// const apiRoutes = require('./routes');
+// const employee = require('./routes');
+// const books = require('./routes');
+// const authors = require('./routes');
+// const subject = require('./routes');
+// const department = require('./routes');
+
+
+
 
 const app = express();
 
@@ -30,7 +43,14 @@ app.use(compression());
 app.use(morgan('tiny', { stream: logStream }));
 app.use(json);
 
+
 app.use('/api', routes);
+
+
+
+
+
+
 
 // Swagger UI
 // Hack around changing URL for swagger.json
@@ -48,7 +68,14 @@ app.use(errorHandler.genericErrorHandler);
 app.use(errorHandler.methodNotAllowed);
 
 app.listen(app.get('port'), app.get('host'), () => {
-  logger.info(`Server started at http://${app.get('host')}:${app.get('port')}/api`);
+  logger.info(`Serverghgfhgf started at http://${app.get('host')}:${app.get('port')}/api`);
 });
+
+// app.listen(app.get('port'), app.get('host'), () => {
+//   logger.info(`Server started at http://${app.get('host')}:${app.get('port')}/apiRoutes`);
+// });
+
+
+
 
 export default app;
